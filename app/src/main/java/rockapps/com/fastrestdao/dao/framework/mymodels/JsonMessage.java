@@ -6,24 +6,46 @@ import com.google.gson.annotations.SerializedName;
  * Created by Renato on 09/11/2014.
  */
 public class JsonMessage {
-    @SerializedName("_meta")
-    protected MetaModel meta = new MetaModel();
+    protected String status;
+    protected String msg;
+    protected String error;
+    protected String code;
 
 
     public boolean success() {
 
-        return meta != null && meta.getStatus() != null && meta.getStatus().equals("SUCCESS");
+        return msg != null && msg.toLowerCase().equals("sucesso");
     }
 
-    public MetaModel getMeta() {
-        return meta;
+    public String getStatus() {
+        return status;
     }
 
-    public void setMeta(MetaModel meta) {
-        this.meta = meta;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getMessage() {
-        return meta.getStatus();
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String message) {
+        this.msg = message;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

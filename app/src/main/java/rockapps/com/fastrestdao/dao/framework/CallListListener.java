@@ -114,7 +114,7 @@ public class CallListListener<E> extends CallListener<E> {
 
     public String getErrorMessage() {
         try {
-            return jsonMessageList.getMessage();
+            return jsonMessageList.getError();
         } catch (Exception e) {
             return defaultErrorMessage;
         }

@@ -5,16 +5,19 @@ import android.app.ProgressDialog;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
+
+import rockapps.com.fastrestdao.R;
 
 public abstract class GenericAbstractDao<E> {
 
 	protected Activity activity;
 	protected Gson gson;
 	protected ProgressDialog dialog;
-	protected String serverUrl = "http://yoururl/";
+	protected String serverUrl = activity.getString(R.string.server_url);
     protected String modelUrl;
 
 	public GenericAbstractDao(Activity activity) {
@@ -29,19 +32,19 @@ public abstract class GenericAbstractDao<E> {
         RequestController.getInstance(activity).addToRequestQueue(request);}
 
     public void getAll(CallListListener callListener){
-        AuthJsonObjectRequest request = new AuthJsonObjectRequest(Request.Method.GET, serverUrl + modelUrl, null, callListener, callListener);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, serverUrl + modelUrl, null, callListener, callListener);
         addRequest(request);
     };
 
     public void getById(CallSingleListener callListener, int id) {
-        AuthJsonObjectRequest request = new AuthJsonObjectRequest(Request.Method.GET, serverUrl + modelUrl + "/" + id, null, callListener, callListener);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, serverUrl + modelUrl + "/" + id, null, callListener, callListener);
         addRequest(request);
     };
 
     public void add(CallSingleListener callListener,E model) {
         try {
             String gsonUser = new JSONObject(gson.toJson(model)).toString();
-            AuthJsonObjectRequest request = new AuthJsonObjectRequest(Request.Method.POST, serverUrl + modelUrl, new JSONObject(gson.toJson(model)), callListener, callListener);
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, serverUrl + modelUrl, new JSONObject(gson.toJson(model)), callListener, callListener);
             addRequest(request);
         }
         catch (Exception e) {
@@ -52,7 +55,7 @@ public abstract class GenericAbstractDao<E> {
 
     public void edit(CallSingleListener callListener,E model) {
         try {
-            AuthJsonObjectRequest request = new AuthJsonObjectRequest(Request.Method.PUT, serverUrl + modelUrl, new JSONObject(gson.toJson(model)), callListener, callListener);
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, serverUrl + modelUrl, new JSONObject(gson.toJson(model)), callListener, callListener);
             addRequest(request);
         }
         catch (Exception e) {
@@ -62,7 +65,7 @@ public abstract class GenericAbstractDao<E> {
 
     public void delete(CallSingleListener callListener, int id) {
         try {
-            AuthJsonObjectRequest request = new AuthJsonObjectRequest(Request.Method.DELETE, serverUrl + modelUrl + "/" + id, null, callListener, callListener);
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, serverUrl + modelUrl + "/" + id, null, callListener, callListener);
             addRequest(request);
         }
         catch (Exception e) {

@@ -100,7 +100,7 @@ public class CallSingleListener<E> extends CallListener<E> {
 
     public String getErrorMessage() {
         try {
-            return jsonMessageSingle.getMessage();
+            return jsonMessageSingle.getError();
         } catch (Exception e) {
             return defaultErrorMessage;
         }
