@@ -99,7 +99,7 @@ the **onDialogButtonClick** is optional, it creates a error dialog when the requ
 The **"Message to show on dialog"** is optional, it creates a dialog while the request is beeing made.
 
 
-**The getById requests use the same approach, but you need to pass a CallSingleListener (it parses a single object, instead of array).**
+The **getByIdrequests** use the same approach, but you **need to pass a CallSingleListener** (it parses a single object, instead of array).
 
 
 
