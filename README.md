@@ -3,10 +3,10 @@
 Framework for fast and easy rest and webservice communication.
 
 
-Features
+**Features**
+- Auto parse json based on objet type;
 - Auto add progress dialogs;
 - Auto save json for offline usage (with parsed objects and list);
-- Auto parse object and object lists;
 - Auto add on error dialog (try again dialog);
 - Auto inflate loading and error layout with custom try again button;
 
@@ -92,3 +92,17 @@ Then on your activities you must use a CallListener to handle the json parse, sa
             new TelephoneDao(getActivity()).getAll(callListener); // make the call
     }
 ```
+
+The **true**, is for **saving** the parsed list **for offline usage** (it parses and saves the list using gson)
+The null is to use the default class name for local save (you can pass a string here to save with custom name)
+the **onDialogButtonClick** is optional, it creates a error dialog when the request fails.
+The **"Message to show on dialog"** is optional, it creates a dialog while the request is beeing made.
+
+
+**The getById requests use the same approach, but you need to pass a CallSingleListener (it parses a single object, instead of array).**
+
+
+
+**There are more constructors for CallListener:**
+- Auto inflate a layout with a progress dialog;
+- dont use a progress dialog;
