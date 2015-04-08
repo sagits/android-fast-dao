@@ -18,15 +18,14 @@ Open your values.xml and change server_url to your server url.
 
 Create a class that extends GenericAbstractDao using your the model that your want :
 
-
+```java
     public class TelephoneDao extends GenericAbstractDao<Telephone> {
-
-      public TelephoneDao(Activity activity) {
-        super(activity);
-        super.modelUrl = "telephone"; // this is the url under the domain for telephone object
-      }
-      
+        public TelephoneDao(Activity activity) {
+            super(activity);
+            super.modelUrl = "telephone"; // this is the url under the domain for telephone object
+        }
     }
+```
     
     
 It inerits the four common methods from GenericAbstractDao (getAll, getById, add, delete).
