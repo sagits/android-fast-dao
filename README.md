@@ -29,10 +29,12 @@ Create a class that extends GenericAbstractDao using your the model that your wa
     }
     
     
-    It inerits the four common methods from GenericAbstractDao (getAll, getById, add, delete).
+It inerits the four common methods from GenericAbstractDao (getAll, getById, add, delete).
     
     
-    Then on your activities you must use a CallListener to handle the json parse, save local data, create dialogs, etc:
+
+
+Then on your activities you must use a CallListener to handle the json parse, save local data, create dialogs, etc:
     
     
            private void getData() {
