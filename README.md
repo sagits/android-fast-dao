@@ -19,7 +19,7 @@ Open **JsonMessage.class** and adapt to your webservice return
 
 
 
-- You can define your server requests types on GenericAbstractDao.class, but its already pre configured for restfull.
+- You can define your server requests types on **GenericAbstractDao.class**, but its already pre configured for restfull.
 
 Create a class that extends GenericAbstractDao using your the model that your want :
 
