@@ -35,7 +35,7 @@ It inerits the four common methods from GenericAbstractDao (getAll, getById, add
 
 Then on your activities you must use a CallListener to handle the json parse, save local data, create dialogs, etc:
     
-    ```java
+```java
            private void getData() {
 
             OnDialogButtonClick onDialogButtonClick = new OnDialogButtonClick() {
