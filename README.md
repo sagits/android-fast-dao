@@ -12,7 +12,12 @@ Features
 
 # example
 
-Open your values.xml and change server_url to your server url.
+Open your **values.xml** and change server_url to your server url
+
+
+Open **JsonMessage.class** and adapt to your webservice return
+
+
 
 - You can define your server requests types on GenericAbstractDao.class, but its already pre configured for restfull.
 
