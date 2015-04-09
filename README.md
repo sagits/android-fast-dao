@@ -97,7 +97,7 @@ The **true**, is for **saving** the parsed list **for offline usage** (it parses
 
 The null is to use the default class name for local save (you can pass a string here to save with custom name).
 
-the **onDialogButtonClick** is optional, it creates a error dialog when the request fails.
+The **onDialogButtonClick** is optional, it creates a error dialog when the request fails.
 
 The **"Message to show on dialog"** is optional, it creates a dialog while the request is beeing made.
 
