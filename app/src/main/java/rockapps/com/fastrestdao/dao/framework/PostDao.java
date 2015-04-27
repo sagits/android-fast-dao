@@ -10,9 +10,9 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-public class RestDao<E> extends GenericAbstractDao<E>{
+public class PostDao<E> extends GenericAbstractDao<E>{
 
-	public RestDao(Activity activity) {
+	public PostDao(Activity activity) {
         super(activity);
 	}
 	

@@ -7,8 +7,11 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONObject;
+
+import java.util.HashMap;
 
 public abstract class GenericAbstractDao<E> {
 
@@ -70,4 +73,30 @@ public abstract class GenericAbstractDao<E> {
         }
         return type;
     }
+
+
+    public HashMap mapFromObject(E model) {
+        try {
+            String gsonUser = new JSONObject(gson.toJson(model)).toString();
+            HashMap<String,String> objectAsMap = new Gson().fromJson(gsonUser, new TypeToken<HashMap<String, String>>(){}.getType());
+
+            return objectAsMap;
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+
+    public HashMap mapFromAnotherObject(Object model) {
+        try {
+            String gsonUser = new JSONObject(gson.toJson(model)).toString();
+            HashMap<String,String> objectAsMap = new Gson().fromJson(gsonUser, new TypeToken<HashMap<String, String>>(){}.getType());
+
+            return objectAsMap;
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+
 }
