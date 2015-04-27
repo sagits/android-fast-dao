@@ -23,39 +23,55 @@ public class CallListListener<E> extends CallListener<E> {
         super(type);
     }
 
+
+
+    // NO DIALOG
     public CallListListener(Activity activity, Class<E> type) {
         super(activity, type);
     }
 
+
+    // LAYOUT DIALOG
     public CallListListener(Activity activity, Class<E> type, RelativeLayout parentLayout) {
         super(activity, type, parentLayout);
     }
 
+    // LAYOUT DIALOG, ERROR DIALOG, SAVE LIST
     public CallListListener(Activity activity, Class<E> type, RelativeLayout parentLayout, OnDialogButtonClick onDialogButtonClick, Boolean saveLocal, String saveLocalName) {
         super(activity, type, parentLayout, onDialogButtonClick, saveLocal, saveLocalName);
     }
 
+    // DIALOG, ERROR DIALOG
     public CallListListener(Activity activity, Class<E> type, String message, OnDialogButtonClick onDialogButtonClick) {
         super(activity, type, message, onDialogButtonClick);
     }
 
+
+    // JUST ERROR DIALOG
     public CallListListener(Activity activity, Class<E> type, OnDialogButtonClick onDialogButtonClick) {
         super(activity, type, onDialogButtonClick);
     }
 
+
+    // JUST DIALOG
     public CallListListener(Activity activity, Class<E> type, String message) {
         super(activity, type, message);
     }
 
+
+    // SAVE LOCAL LIST, WITH DIALOG, WITH ERROR DIALOG
     public CallListListener(Activity activity, Class<E> type, String message, OnDialogButtonClick onDialogButtonClick, Boolean saveLocal, String saveLocalName) {
         super(activity, type, message, onDialogButtonClick, saveLocal, saveLocalName);
     }
 
+
+    // CHANGE OBJECT ARRAY NAME, WITH DIALOG, WITH ERROR DIALOG
     public CallListListener(Activity activity, Class<E> type, String message, OnDialogButtonClick onDialogButtonClick, String objectName) {
         super(activity, type, message, onDialogButtonClick);
         this.objectName = objectName;
     }
 
+    // CHANGE OBJECT ARRAY NAME, WITH DIALOG, WITH ERROR DIALOG, SAVE LOCAL LIST
     public CallListListener(Activity activity, Class<E> type, String message, OnDialogButtonClick onDialogButtonClick, Boolean saveLocal, String saveLocalName, String objectName) {
         super(activity, type, message, onDialogButtonClick, saveLocal, saveLocalName);
         this.objectName = objectName;

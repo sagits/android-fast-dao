@@ -77,8 +77,11 @@ public abstract class CallListener<E> implements ErrorListener, Response.Listene
     public CallListener(Activity activity, Class<E> type, String message) {
         this();
         this.activity = activity;
-        dialog = new ProgressDialog(activity);
-        dialog.setMessage(message);
+        if (message != null) {
+            dialog = new ProgressDialog(activity);
+            dialog.setMessage(message);
+            dialog.setCancelable(false);
+        }
         this.type = type;
         onPreExecute();
     }
@@ -87,8 +90,11 @@ public abstract class CallListener<E> implements ErrorListener, Response.Listene
         this();
         this.onDialogButtonClick = onDialogButtonClick;
         this.activity = activity;
-        dialog = new ProgressDialog(activity);
-        dialog.setMessage(message);
+        if (message != null) {
+            dialog = new ProgressDialog(activity);
+            dialog.setMessage(message);
+            dialog.setCancelable(false);
+        }
         this.type = type;
         onPreExecute();
     }
@@ -109,9 +115,11 @@ public abstract class CallListener<E> implements ErrorListener, Response.Listene
         this();
         this.onDialogButtonClick = onDialogButtonClick;
         this.activity = activity;
-        dialog = new ProgressDialog(activity);
-        dialog.setMessage(message);
-        dialog.setCancelable(false);
+        if (message != null) {
+            dialog = new ProgressDialog(activity);
+            dialog.setMessage(message);
+            dialog.setCancelable(false);
+        }
         this.type = type;
         this.saveLocal = saveLocal;
         this.saveLocalName = saveLocalName;
@@ -122,6 +130,9 @@ public abstract class CallListener<E> implements ErrorListener, Response.Listene
     @Override
     public void onErrorResponse(VolleyError error) {
         onPostExecute("error");
+
+        Log.w(" erro volley", " erro");
+
         try {
             String responseBody = new String(error.networkResponse.data, "utf-8");
             SmarterLogMAKER.w("Error: " + new JSONObject(responseBody).toString(4));
@@ -133,12 +144,20 @@ public abstract class CallListener<E> implements ErrorListener, Response.Listene
         String errorMsg = "";
         if (error instanceof TimeoutError) {
             errorMsg = "TimeoutError";
-        } else if (error instanceof ServerError || error instanceof AuthFailureError) {
+        } else if (error instanceof ServerError) {
             errorMsg = "isServerProblem";
+        } else if (error instanceof AuthFailureError) {
+            errorMsg = "Authentication error";
         } else if (error instanceof NetworkError || error instanceof NoConnectionError) {
             errorMsg = "isNetworkProblem";
         }
-        Log.w("Error type: ", errorMsg);
+        Log.w("Parent activity", activity.getClass().getSimpleName() + "");
+        Log.w("Error volley:", errorMsg);
+
+        try {
+            SmarterLogMAKER.w("http error code " + error.networkResponse.statusCode);
+        } catch (Exception e) {
+        }
 
     }
 
