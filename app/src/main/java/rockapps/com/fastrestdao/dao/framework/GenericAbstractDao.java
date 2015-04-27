@@ -10,68 +10,45 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-import rockapps.com.fastrestdao.R;
-
 public abstract class GenericAbstractDao<E> {
 
-	protected Activity activity;
-	protected Gson gson;
-	protected ProgressDialog dialog;
-	protected String serverUrl = activity.getString(R.string.server_url);
+    protected Activity activity;
+    protected Gson gson;
+    protected ProgressDialog dialog;
+    protected String serverUrl = "serverurl";
     protected String modelUrl;
 
-	public GenericAbstractDao(Activity activity) {
-		this.activity = activity;
-		gson = new Gson();
-	}
-	
-	protected void addRequest(Request request) {
+    public GenericAbstractDao(Activity activity) {
+        this.activity = activity;
+        gson = new Gson();
+    }
+
+    protected void addRequest(Request request) {
         request.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS, 5, 0.1f));
-        SmarterLogMAKER.w("Making request "+ getRequestType(request.getMethod()) +" to: "+request.getUrl());
+        SmarterLogMAKER.w("Making request " + getRequestType(request.getMethod()) + " to: " + request.getUrl());
 
-        RequestController.getInstance(activity).addToRequestQueue(request);}
-
-    public void getAll(CallListListener callListener){
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, serverUrl + modelUrl, null, callListener, callListener);
-        addRequest(request);
-    };
-
-    public void getById(CallSingleListener callListener, int id) {
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, serverUrl + modelUrl + "/" + id, null, callListener, callListener);
-        addRequest(request);
-    };
-
-    public void add(CallSingleListener callListener,E model) {
-        try {
-            String gsonUser = new JSONObject(gson.toJson(model)).toString();
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, serverUrl + modelUrl, new JSONObject(gson.toJson(model)), callListener, callListener);
-            addRequest(request);
-        }
-        catch (Exception e) {
-
-        }
+        RequestController.getInstance(activity).addToRequestQueue(request);
     }
 
+    public abstract void getAll(CallListListener callListener, String url);
 
-    public void edit(CallSingleListener callListener,E model) {
-        try {
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, serverUrl + modelUrl, new JSONObject(gson.toJson(model)), callListener, callListener);
-            addRequest(request);
-        }
-        catch (Exception e) {
+    public abstract void getById(CallSingleListener callListener, int id, String url);
 
-        }
-    }
+    public abstract void add(CallSingleListener callListener, E model, String url);
 
-    public void delete(CallSingleListener callListener, int id) {
-        try {
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, serverUrl + modelUrl + "/" + id, null, callListener, callListener);
-            addRequest(request);
-        }
-        catch (Exception e) {
-        }
-    }
+    public abstract void edit(CallSingleListener callListener, E model, String url);
 
+    public abstract void delete(CallSingleListener callListener, int id, String url);
+
+    public abstract void getAll(CallListListener callListener);
+
+    public abstract void getById(CallSingleListener callListener, int id);
+
+    public abstract void add(CallSingleListener callListener, E model);
+
+    public abstract void edit(CallSingleListener callListener, E model);
+
+    public abstract void delete(CallSingleListener callListener, int id);
 
     private String getRequestType(int id) {
         String type = new String();
