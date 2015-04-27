@@ -35,7 +35,7 @@ public class PostDao<E> extends GenericAbstractDao<E>{
     public void add(CallSingleListener callListener,E model) {
         try {
             String gsonUser = new JSONObject(gson.toJson(model)).toString();
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, serverUrl + modelUrl, new JSONObject(gson.toJson(model)), callListener, callListener);
+            CustomRequest request = new CustomRequest(Request.Method.POST, serverUrl + modelUrl, mapFromObject(model), callListener, callListener);
             addRequest(request);
         }
         catch (Exception e) {
@@ -46,7 +46,7 @@ public class PostDao<E> extends GenericAbstractDao<E>{
 
     public void edit(CallSingleListener callListener,E model) {
         try {
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, serverUrl + modelUrl, new JSONObject(gson.toJson(model)), callListener, callListener);
+            CustomRequest request = new CustomRequest(Request.Method.POST, serverUrl + modelUrl, mapFromObject(model), callListener, callListener);
             addRequest(request);
         }
         catch (Exception e) {
@@ -56,7 +56,7 @@ public class PostDao<E> extends GenericAbstractDao<E>{
 
     public void delete(CallSingleListener callListener, int id) {
         try {
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, serverUrl + modelUrl + "/" + id, null, callListener, callListener);
+            CustomRequest request = new CustomRequest(Request.Method.GET, serverUrl + modelUrl + "/" + id, null, callListener, callListener);
             addRequest(request);
         }
         catch (Exception e) {
@@ -66,13 +66,13 @@ public class PostDao<E> extends GenericAbstractDao<E>{
 
     @Override
     public void getAll(CallListListener callListener, String url) {
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, callListener, callListener);
+        CustomRequest request = new CustomRequest(Request.Method.GET, url, null, callListener, callListener);
         addRequest(request);
     }
 
     @Override
     public void getById(CallSingleListener callListener, int id, String url) {
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url + "/" + id, null, callListener, callListener);
+        CustomRequest request = new CustomRequest(Request.Method.GET, url + "/" + id, null, callListener, callListener);
         addRequest(request);
     }
 
@@ -80,7 +80,7 @@ public class PostDao<E> extends GenericAbstractDao<E>{
     public void add(CallSingleListener callListener, E model, String url) {
         try {
             String gsonUser = new JSONObject(gson.toJson(model)).toString();
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(gson.toJson(model)), callListener, callListener);
+            CustomRequest request = new CustomRequest(Request.Method.POST, url, mapFromObject(model), callListener, callListener);
             addRequest(request);
         }
         catch (Exception e) {
@@ -91,7 +91,7 @@ public class PostDao<E> extends GenericAbstractDao<E>{
     @Override
     public void edit(CallSingleListener callListener, E model, String url) {
         try {
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, url, new JSONObject(gson.toJson(model)), callListener, callListener);
+            CustomRequest request = new CustomRequest(Request.Method.POST, url, mapFromObject(model), callListener, callListener);
             addRequest(request);
         }
         catch (Exception e) {
@@ -102,7 +102,7 @@ public class PostDao<E> extends GenericAbstractDao<E>{
     @Override
     public void delete(CallSingleListener callListener, int id, String url) {
         try {
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, serverUrl + modelUrl + "/" + id, null, callListener, callListener);
+            CustomRequest request = new CustomRequest(Request.Method.GET, serverUrl + modelUrl + "/" + id, null, callListener, callListener);
             addRequest(request);
         }
         catch (Exception e) {
