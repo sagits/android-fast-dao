@@ -101,7 +101,7 @@ public class CallListListener<E> extends CallListener<E> {
     public List<E> getList(Class<E> type, JSONArray json) throws Exception {
         Gson gsonB = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
-        return gsonB.fromJson(removeAcentos(json.toString()), new JsonListHelper<E>(type));
+        return gsonB.fromJson(json.toString(), new JsonListHelper<E>(type));
     }
 
     public String removeAcentos(String str) {

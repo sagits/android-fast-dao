@@ -20,13 +20,9 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-import java.lang.reflect.Method;
 import java.util.List;
-import java.util.Objects;
 import com.android.volley.Response.ErrorListener;
-import com.android.volley.Response.Listener;
 
-import rockapps.com.fastrestdao.R;
 import rockapps.com.fastrestdao.dao.local.LocalDbImplement;
 
 public abstract class CallListener<E> implements ErrorListener, Response.Listener<JSONObject>, VolleyOnPreExecute {
