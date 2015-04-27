@@ -25,45 +25,54 @@ public class CallSingleListener<E> extends CallListener<E> {
         super(type);
     }
 
+
+
+    // LAYOUT LOADING
     public CallSingleListener(Activity activity, Class<E> type, RelativeLayout parentLayout) {
         super(activity, type, parentLayout);
     }
 
 
+    // LAYOUT LOADING WITH ON ERROR DIALOG AND SAVE
     public CallSingleListener(Activity activity, Class<E> type, RelativeLayout parentLayout, OnDialogButtonClick onDialogButtonClick, Boolean saveLocal, String saveLocalName) {
         super(activity, type, parentLayout, onDialogButtonClick, saveLocal, saveLocalName);
     }
 
+
+    // NO LOADING DIALOG WITH ON ERROR DIALOG
     public CallSingleListener(Activity activity, Class<E> type, OnDialogButtonClick onDialogButtonClick) {
         super(activity, type, onDialogButtonClick);
     }
 
+    // ON ERROR DIALOG
     public CallSingleListener(Activity activity, Class<E> type, String message, OnDialogButtonClick onDialogButtonClick) {
         super(activity, type, message, onDialogButtonClick);
     }
 
+    // SAVE LOCAL AND ON ERROR DIALOG
     public CallSingleListener(Activity activity, Class<E> type, String message, OnDialogButtonClick onDialogButtonClick, Boolean saveLocal, String saveLocalName) {
         super(activity, type, message, onDialogButtonClick, saveLocal, saveLocalName);
     }
 
+    // FROM DIALOG
     public CallSingleListener(Activity activity, Class<E> type, String message) {
         super(activity, type, message);
     }
 
+    // CHANGE OBJECT NAME AND ON ERROR DIALOG
     public CallSingleListener(Activity activity, Class<E> type, String message, OnDialogButtonClick onDialogButtonClick, String objectName) {
         super(activity, type, message, onDialogButtonClick);
         this.objectName = objectName;
     }
 
+    // CHANGE OBJECT NAME AND SAVE LOCAL
     public CallSingleListener(Activity activity, Class<E> type, String message, OnDialogButtonClick onDialogButtonClick, Boolean saveLocal, String saveLocalName, String objectName) {
         super(activity, type, message, onDialogButtonClick, saveLocal, saveLocalName);
         this.objectName = objectName;
     }
 
 
-
-
-
+    // NO DIALOG
     public CallSingleListener(Activity activity, Class<E> type) {
         super(activity, type);
     }
@@ -85,7 +94,7 @@ public class CallSingleListener<E> extends CallListener<E> {
     public void onParse(JSONObject json) {
         jsonMessageSingle = gson.fromJson(json.toString(), JsonMessageSingle.class);
         try {
-            jsonMessageSingle.setObject(getObject(type, json.getJSONObject(objectName)));
+            jsonMessageSingle.setObject(getObject(type, json.has(objectName) ? json.getJSONObject(objectName) : json));
             if (saveLocal) {
                 saveLocal(jsonMessageSingle.getObject(), saveLocalName);
             }
