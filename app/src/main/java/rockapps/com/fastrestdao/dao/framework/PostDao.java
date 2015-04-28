@@ -102,7 +102,7 @@ public class PostDao<E> extends GenericAbstractDao<E>{
     @Override
     public void delete(CallSingleListener callListener, int id, String url) {
         try {
-            CustomRequest request = new CustomRequest(Request.Method.GET, serverUrl + modelUrl + "/" + id, null, callListener, callListener);
+            CustomRequest request = new CustomRequest(Request.Method.GET, url + "/" + id, null, callListener, callListener);
             addRequest(request);
         }
         catch (Exception e) {

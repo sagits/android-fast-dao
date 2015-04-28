@@ -102,7 +102,7 @@ public class RestDao<E> extends GenericAbstractDao<E>{
     @Override
     public void delete(CallSingleListener callListener, int id, String url) {
         try {
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, serverUrl + modelUrl + "/" + id, null, callListener, callListener);
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, url + "/" + id, null, callListener, callListener);
             addRequest(request);
         }
         catch (Exception e) {
