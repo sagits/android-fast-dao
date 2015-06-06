@@ -15,17 +15,15 @@ Framework for fast and easy rest and post webservice communication.
 
 # example
 
-Open your **values.xml** and change server_url to your server url
+Open **JsonMessage.class** and adapt to your webservice return.
 
 
-Open **JsonMessage.class** and adapt to your webservice return
-
-
-Doing a single request:
+**Doing a single request:**
 
 new RestDao<MyModel>(Activity, "MyModelBaseUrlName", "serverUrl").getAll(CallListListener); 
 
-Create a dao:
+**Creating a dao:**
+
 Extends RestDao or PostDao using the model that you want :
 
 ```java
@@ -39,12 +37,6 @@ Extends RestDao or PostDao using the model that you want :
 ```
     
 It inerits four methods (getAll, getById, add, delete).
-
-Creating single request with different url:
-```
-MyDao.getAll(callListListener, myURL);
-MyDao.getById(callSingleListener, id, myUrl);
-```
 
 Then on your activities you must use a CallListener to handle the json parse, save local data, create dialogs, etc:
     
@@ -112,6 +104,11 @@ The **"Message to show on dialog"** is optional, it creates a dialog while the r
 
 The **getById request** use the same approach, but you **need to pass a CallSingleListener** (it parses a single object, instead of an array).
 
+**You can create a single request with different url too:**
+```
+MyDao.getAll(callListListener, myURL);
+MyDao.getById(callSingleListener, id, myUrl);
+```
 
 **There are more constructors for CallListener:**
 - Auto inflate a layout with a progress dialog (to use with a relativeLayout parent);
