@@ -3,7 +3,7 @@
 Framework for fast and easy rest and post webservice communication.
 
 
-**Features**
+# Features
 - Auto parse json based on objet type (lists and objects);
 - Parse entire webservice response (objects, status, msg, etc)
 - Auto add progress dialogs;
