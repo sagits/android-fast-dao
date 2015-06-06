@@ -17,16 +17,6 @@ public class CallSingleListener<E> extends CallListener<E> {
     public JsonMessageSingle<E> jsonMessageSingle;
     private String objectName = "records";
 
-    public CallSingleListener() {
-
-    }
-
-    public CallSingleListener(Class<E> type) {
-        super(type);
-    }
-
-
-
     // LAYOUT LOADING
     public CallSingleListener(Activity activity, Class<E> type, RelativeLayout parentLayout) {
         super(activity, type, parentLayout);

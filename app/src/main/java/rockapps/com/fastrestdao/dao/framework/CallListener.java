@@ -23,6 +23,7 @@ import org.json.JSONObject;
 import java.util.List;
 import com.android.volley.Response.ErrorListener;
 
+import rockapps.com.fastrestdao.R;
 import rockapps.com.fastrestdao.dao.local.LocalDbImplement;
 
 public abstract class CallListener<E> implements ErrorListener, Response.Listener<JSONObject>, VolleyOnPreExecute {
@@ -48,26 +49,18 @@ public abstract class CallListener<E> implements ErrorListener, Response.Listene
         onPreExecute();
     }
 
-    public CallListener(Class<E> type) {
-        this();
-        this.type = type;
-    }
-
     public CallListener(Activity activity, Class<E> type) {
-        this();
         this.activity = activity;
         this.type = type;
+        onPreExecute();
     }
 
     public CallListener(Activity activity, Class<E> type, OnDialogButtonClick onDialogButtonClick) {
-        this();
+        this(activity, type);
         this.onDialogButtonClick = onDialogButtonClick;
-        this.activity = activity;
-        this.type = type;
     }
 
     public CallListener(Activity activity, Class<E> type, RelativeLayout parentLayout) {
-        this();
         this.activity = activity;
         this.parentLayout = parentLayout;
         this.type = type;
@@ -75,7 +68,6 @@ public abstract class CallListener<E> implements ErrorListener, Response.Listene
     }
 
     public CallListener(Activity activity, Class<E> type, String message) {
-        this();
         this.activity = activity;
         if (message != null) {
             dialog = new ProgressDialog(activity);
@@ -87,7 +79,6 @@ public abstract class CallListener<E> implements ErrorListener, Response.Listene
     }
 
     public CallListener(Activity activity, Class<E> type, String message, OnDialogButtonClick onDialogButtonClick) {
-        this();
         this.onDialogButtonClick = onDialogButtonClick;
         this.activity = activity;
         if (message != null) {
@@ -99,8 +90,15 @@ public abstract class CallListener<E> implements ErrorListener, Response.Listene
         onPreExecute();
     }
 
+    public CallListener(Activity activity, Class<E> type, RelativeLayout parentLayout, OnDialogButtonClick onDialogButtonClick) {
+        this.onDialogButtonClick = onDialogButtonClick;
+        this.activity = activity;
+        this.parentLayout = parentLayout;
+        this.type = type;
+        onPreExecute();
+    }
+
     public CallListener(Activity activity, Class<E> type, RelativeLayout parentLayout, OnDialogButtonClick onDialogButtonClick, Boolean saveLocal, String saveLocalName) {
-        this();
         this.activity = activity;
         this.onDialogButtonClick = onDialogButtonClick;
         this.parentLayout = parentLayout;
@@ -112,7 +110,6 @@ public abstract class CallListener<E> implements ErrorListener, Response.Listene
 
 
     public CallListener(Activity activity, Class<E> type, String message, OnDialogButtonClick onDialogButtonClick, Boolean saveLocal, String saveLocalName) {
-        this();
         this.onDialogButtonClick = onDialogButtonClick;
         this.activity = activity;
         if (message != null) {
@@ -131,7 +128,7 @@ public abstract class CallListener<E> implements ErrorListener, Response.Listene
     public void onErrorResponse(VolleyError error) {
         onPostExecute("error");
 
-        Log.w(" erro volley", " erro");
+        Log.w(" error volley", " error");
 
         try {
             String responseBody = new String(error.networkResponse.data, "utf-8");
@@ -185,7 +182,7 @@ public abstract class CallListener<E> implements ErrorListener, Response.Listene
     @Override
     public void onResponse(JSONObject json) {
         try {
-            SmarterLogMAKER.w("Sucess: " + json.toString(4));
+            SmarterLogMAKER.w("Success: " + json.toString(4));
         } catch (Exception e) {
         }
         onPostExecute("sucess");
@@ -263,12 +260,12 @@ public abstract class CallListener<E> implements ErrorListener, Response.Listene
         new LocalDbImplement<E>(activity.getApplicationContext()).saveList(objects, type, name);
     }
 
- /*   public E getLocalObjectFromList(int id) {
+    public E getLocalObjectFromList(GetLocalObjectInterface<E> getLocalObjectInterface) {
         List<E> localList = getLocalList();
 
         try {
             for (Object o : localList) {
-                if (((MyModel) o).getId() == id) {
+                if (getLocalObjectInterface.search((E) o)) {
                     return (E) o;
                 }
             }
@@ -276,7 +273,7 @@ public abstract class CallListener<E> implements ErrorListener, Response.Listene
             return null;
         }
         return null;
-    } */
+    }
 
     public E getLocalObject() {
         return new LocalDbImplement<E>(activity.getApplicationContext()).get(type, saveLocalName != null ? saveLocalName : type.getSimpleName());
@@ -285,6 +282,11 @@ public abstract class CallListener<E> implements ErrorListener, Response.Listene
     public List<E> getLocalList() {
         String name = saveLocalName != null ? saveLocalName : type.getSimpleName();
         return new LocalDbImplement<E>(activity.getApplicationContext()).getList(type, name);
+    }
+
+
+    public interface GetLocalObjectInterface<E> {
+        public boolean search(E model);
     }
 
 

@@ -1,4 +1,4 @@
-package rockapps.com.fastrestdao.dao.framework;
+package rockapps.com.fastrestdao.dao.framework.dao;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -13,6 +13,11 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import rockapps.com.fastrestdao.dao.framework.CallListListener;
+import rockapps.com.fastrestdao.dao.framework.CallSingleListener;
+import rockapps.com.fastrestdao.dao.framework.RequestController;
+import rockapps.com.fastrestdao.dao.framework.SmarterLogMAKER;
+
 public abstract class GenericAbstractDao<E> {
 
     protected Activity activity;
@@ -24,6 +29,12 @@ public abstract class GenericAbstractDao<E> {
     public GenericAbstractDao(Activity activity) {
         this.activity = activity;
         gson = new Gson();
+    }
+
+    public GenericAbstractDao(Activity activity, String modelUrl, String serverUrl) {
+        this(activity);
+        this.modelUrl = modelUrl;
+        this.serverUrl = serverUrl;
     }
 
     protected void addRequest(Request request) {
@@ -99,4 +110,19 @@ public abstract class GenericAbstractDao<E> {
 
     }
 
+    public String getServerUrl() {
+        return serverUrl;
+    }
+
+    public void setServerUrl(String serverUrl) {
+        this.serverUrl = serverUrl;
+    }
+
+    public String getModelUrl() {
+        return modelUrl;
+    }
+
+    public void setModelUrl(String modelUrl) {
+        this.modelUrl = modelUrl;
+    }
 }

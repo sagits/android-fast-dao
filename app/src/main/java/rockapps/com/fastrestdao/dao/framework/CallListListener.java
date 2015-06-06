@@ -19,12 +19,6 @@ public class CallListListener<E> extends CallListener<E> {
     public JsonMessageList<E> jsonMessageList;
     private String objectName = "records";
 
-    public CallListListener(Class<E> type) {
-        super(type);
-    }
-
-
-
     // NO DIALOG
     public CallListListener(Activity activity, Class<E> type) {
         super(activity, type);

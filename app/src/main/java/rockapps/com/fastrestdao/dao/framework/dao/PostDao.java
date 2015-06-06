@@ -1,24 +1,33 @@
-package rockapps.com.fastrestdao.dao.framework;
+package rockapps.com.fastrestdao.dao.framework.dao;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-public class PostDao<E> extends GenericAbstractDao<E>{
+import rockapps.com.fastrestdao.dao.framework.CallListListener;
+import rockapps.com.fastrestdao.dao.framework.CallSingleListener;
+import rockapps.com.fastrestdao.dao.framework.CustomRequest;
+import rockapps.com.fastrestdao.dao.framework.RequestController;
+import rockapps.com.fastrestdao.dao.framework.SmarterLogMAKER;
+import rockapps.com.fastrestdao.dao.framework.dao.GenericAbstractDao;
+
+public class PostDao<E> extends GenericAbstractDao<E> {
 
 	public PostDao(Activity activity) {
         super(activity);
 	}
-	
-	protected void addRequest(Request request) {
+
+    public PostDao(Activity activity, String modelUrl, String serverUrl) {
+        super(activity, modelUrl, serverUrl);
+    }
+
+    protected void addRequest(Request request) {
         request.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS, 5, 0.1f));
-        SmarterLogMAKER.w("Making request "+ getRequestType(request.getMethod()) +" to: "+request.getUrl());
+        SmarterLogMAKER.w("Making request " + getRequestType(request.getMethod()) + " to: " + request.getUrl());
 
         RequestController.getInstance(activity).addToRequestQueue(request);}
 
