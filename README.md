@@ -19,9 +19,9 @@ Open **JsonMessage.class** and adapt to your webservice return.
 
 
 **Doing a single request:**
-
+```java
 new RestDao<MyModel>(Activity, "MyModelBaseUrlName", "serverUrl").getAll(CallListListener); 
-
+```
 **Creating a dao:**
 
 Extends RestDao or PostDao using the model that you want :
