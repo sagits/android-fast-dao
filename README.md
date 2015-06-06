@@ -60,32 +60,19 @@ Then on your activities you must use a CallListener to handle the json parse, sa
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     super.onErrorResponse(error);
-                    
-                    // what to do on error, you dont need to implement
-                    
-                /* list = this.getLocalList();   // optional to remove error dialog and populate from data downloaded before
-                  if (list != null) { 
-                        errorDialog.dismiss();
-                        setAdapter(); // your method to set adapter, or what you want
-                    } */
+                    list = this.getLocalList();   //  data downloaded before
                 }
 
                 @Override
                 public void onResponse(JSONObject response) {
                     super.onResponse(response);
-                    try {
-
                         if (this.success()) { // check if things are fine
-                            list = this.jsonMessageList.getObject(); // get the parsed list and add it to the activity list
-                            setAdapter(); // set your adapter
-                        } else { // request is ok, but your server returned an error or not found
+                            list = this.jsonMessageList.getObject(); // get the parsed list
+                          } else { // request is ok, but your server returned an error or not found
                             Toast.makeText(this.activity.getApplicationContext(),
                                     this.getErrorMessage(),
                                     Toast.LENGTH_LONG).show();
                         }
-
-                    } catch (Exception e1) {
-                    }
                 }
             };
 
