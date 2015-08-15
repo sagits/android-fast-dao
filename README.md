@@ -1,4 +1,4 @@
-# android-fast-rest-dao
+# android-fast-dao
 
 Framework for fast and easy rest and post webservice communication.
 
