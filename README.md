@@ -6,12 +6,13 @@ Framework for fast and easy rest and post webservice communication.
 # Features
 - Auto parse json based on objet type (lists and objects);
 - Parse entire webservice response (objects, status, msg, etc)
-- Auto add progress dialogs;
-- Auto save json for offline usage (with parsed objects and list);
-- Auto add on error dialog (try again dialog);
-- Auto inflate loading and error layout with custom try again button;
-- Possibility to create a dao for every object or create a request at runTime;
+- Auto add **progress dialogs**;
+- Auto **save json for offline usage (with parsed objects and list)**;
+- Auto add on error dialog (**try again dialog**);
+- Auto inflate **loading and error layout with custom try again button**;
+- Possibility to **create a dao** for every object **or** create a **single request** at runTime;
 - Possibility to override a url for a single request only;
+- **Post and Rest** support (you can do any type of request, but those come with examples by default);
 
 # example
 
@@ -82,7 +83,7 @@ Then on your activities you must use a CallListener to handle the json parse, sa
 
 The **true**, is for **saving** the parsed list **for offline usage** (it parses and saves the list using gson).
 
-The null is to use the default class name for local save (you can pass a string here to save with custom name).
+The **null** is to use the default class name for local save (you can pass a string here to save with custom name).
 
 The **onDialogButtonClick** is optional, it creates an error dialog when the request fails.
 
